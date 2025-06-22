@@ -43,7 +43,6 @@ const emoji = Object.fromEntries(Object.entries({
     envelope: "9993,65039"
 }).map(([key, value]) => [key, String.fromCodePoint(...value.split(","))]));
 
-const titleBar = [`${emoji.bride}${emoji.envelope}${emoji.groom}`, `${emoji.bride}${emoji.envelope_heart}${emoji.groom}`];
 
 // Mail Parsing
 const emlParser = encoded => {
@@ -94,11 +93,6 @@ const contador = (date) => {
     }
 
 };
-
-const flipBar = (flip = 1) => {
-    window.top.document.title = titleBar[flip];
-    setTimeout(flipBar, 1000, flip ^= 1);
-}
 
 // Sakura Updated
 const Sakura = function Sakura(selector, options) {
@@ -250,6 +244,51 @@ function createFishTreats() {
     }
 }
 
+function createPotatoPeels() {
+    const container = document.getElementById('potatoPeels');
+    for (let i = 0; i < 8; i++) {
+        const peel = document.createElement('img');
+        peel.src = 'assets/pics/peel.png';
+        peel.className = 'potato-peel';
+        peel.style.position = 'absolute';
+        peel.style.left = `${Math.random() * 90}%`;
+        peel.style.top = `${Math.random() * 90}%`;
+        peel.style.width = `${60 + Math.random() * 40}px`;
+        peel.style.transform = `rotate(${Math.random() * 360}deg)`;
+        peel.style.opacity = 0.85;
+        container.appendChild(peel);
+    }
+}
+
+function showSpinningCat(imgSrc) {
+    const cat = document.createElement('img');
+    cat.src = imgSrc;
+    cat.className = 'spinning-cat';
+
+    // Random start and end positions
+    const startX = Math.random() * 80; // vw
+    const startY = Math.random() * 80; // vh
+    const endX = Math.random() * 80;
+    const endY = Math.random() * 80;
+
+    cat.style.position = 'fixed';
+    cat.style.left = `${startX}vw`;
+    cat.style.top = `${startY}vh`;
+    cat.style.width = '258px';
+    cat.style.height = 'auto';
+    cat.style.zIndex = 2000;
+
+    // Set CSS variables for animation
+    cat.style.setProperty('--start-x', `${startX}vw`);
+    cat.style.setProperty('--start-y', `${startY}vh`);
+    cat.style.setProperty('--end-x', `${endX}vw`);
+    cat.style.setProperty('--end-y', `${endY}vh`);
+
+    document.body.appendChild(cat);
+
+    setTimeout(() => cat.remove(), 1200);
+}
+
 function createFallingSnacks() {
     const container = document.querySelector('.sakura-falling');
     const snacks = ['🐟', '🍰'];
@@ -279,13 +318,16 @@ function createFallingSnacks() {
 window.addEventListener('load', () => {
     createPawPrints();
     createFishTreats();
+    createPotatoPeels()
     createFallingSnacks()
-        // Make the button meow when clicked
+
+    // Make the button meow when clicked
     const button = document.getElementById('button');
     button.addEventListener('click', (event) => {
         const meows = ['Meow!', 'Mew!'];
         const randomMeow = meows[Math.floor(Math.random() * meows.length)];
-
+        showSpinningCat('assets/pics/mochi2.png');
+        showSpinningCat('assets/pics/mochi3.png');
         const meowElement = document.createElement('div');
         meowElement.textContent = randomMeow;
         meowElement.style.position = 'absolute';

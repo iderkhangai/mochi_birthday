@@ -102,6 +102,42 @@ h1 {
     margin: 0 auto;
 }
 
+.spinning-cat {
+    position: fixed;
+    pointer-events: none;
+    min-width: 300px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    animation: spin-move-fade 5.2s linear forwards;
+    /* Use CSS variables for dynamic movement */
+    left: var(--start-x);
+    top: var(--start-y);
+}
+
+@keyframes spin-move-fade {
+    0% {
+        transform: rotate(0deg) scale(0.8);
+        opacity: 1;
+        left: var(--start-x);
+        top: var(--start-y);
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(1080deg) scale(0.8);
+        opacity: 0;
+        left: var(--end-x);
+        top: var(--end-y);
+    }
+}
+
+.potato-peel {
+    pointer-events: none;
+    z-index: 5;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.10));
+    transition: opacity 0.5s;
+}
+
 h2 {
     font-size: min(6vmax, 7rem);
     line-height: min(7vmax, 8rem);
