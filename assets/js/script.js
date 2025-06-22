@@ -230,19 +230,7 @@ function createPawPrints() {
     }
 }
 
-// Add floating fish treats
-function createFishTreats() {
-    const container = document.getElementById('fishTreats');
-    for (let i = 0; i < 10; i++) {
-        const fish = document.createElement('div');
-        fish.className = 'fish-treat';
-        fish.innerHTML = '🐟';
-        fish.style.left = `${10 + Math.random() * 80}%`;
-        fish.style.animationDelay = `${Math.random() * 5}s`;
-        fish.style.animationDuration = `${5 + Math.random() * 10}s`;
-        container.appendChild(fish);
-    }
-}
+
 
 function createPotatoPeels() {
     const container = document.getElementById('potatoPeels');
@@ -317,7 +305,7 @@ function createFallingSnacks() {
 // Initialize decorations
 window.addEventListener('load', () => {
     createPawPrints();
-    createFishTreats();
+
     createPotatoPeels()
     createFallingSnacks()
 
